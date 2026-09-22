@@ -4,8 +4,12 @@ Homebrew formulae and casks for [bonjin-app](https://github.com/bonjin-app) proj
 
 ```bash
 brew tap bonjin-app/tap
+brew trust bonjin-app/tap
 brew install --cask prune
 ```
+
+Homebrew 7 refuses to load a cask from a tap it has not been told to trust; `brew trust` is
+what tells it. On Homebrew 6 that command does not exist and the other two lines are enough.
 
 ## What is in here
 
@@ -15,16 +19,17 @@ brew install --cask prune
 
 ## The builds are not signed yet
 
-Prune is not signed with a Developer ID, so macOS quarantines the download and Gatekeeper
-refuses the first launch. Open the app once, then allow it in System Settings → Privacy &
-Security. This is not a claim about what the app does; it means nobody has paid for a
-certificate that vouches for it.
+Prune is not signed with a Developer ID, so `spctl` rejects the bundle and macOS quarantines
+the download. The first launch is refused; the cask's caveats say how to get through it. This
+is not a claim about what the app does — it means nobody has paid for a certificate that
+vouches for it.
 
 ## Where the casks come from
 
 `Casks/prune.rb` is generated from the Prune repository, where it lives at
-`packaging/homebrew/Casks/prune.rb` and is updated by `scripts/update-cask.sh` against a
-published release. Send changes there rather than here, so the two do not drift.
+`packaging/homebrew/Casks/prune.rb` and is written by `scripts/update-cask.sh --publish`
+against a published release. Send changes there rather than here: a change made here is
+overwritten by the next release.
 
 ## Licence
 
