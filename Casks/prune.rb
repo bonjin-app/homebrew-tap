@@ -18,7 +18,7 @@ cask "prune" do
   end
 
   # The bundle asks for 12.0, so an older system would install a copy it cannot open.
-  depends_on macos: ">= :monterey"
+  depends_on macos: :monterey
 
   app "Prune.app"
 
